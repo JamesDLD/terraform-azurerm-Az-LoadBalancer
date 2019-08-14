@@ -1,6 +1,6 @@
 Test
 -----
-[![Build Status](https://dev.azure.com/lec-gal/network-poc/_apis/build/status/Az-LoadBalancer?branchName=master)](https://dev.azure.com/lec-gal/network-poc/_build/latest?definitionId=11&branchName=master)
+Add a status badge here.
 
 Usage
 -----
