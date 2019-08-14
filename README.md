@@ -1,18 +1,17 @@
 Test
 -----
-Add a status badge here.
+[![Build Status](https://dev.azure.com/jamesdld23/vpc_lab/_apis/build/status/JamesDLD.terraform-azurerm-Az-LoadBalancer?branchName=master)](https://dev.azure.com/jamesdld23/vpc_lab/_build/latest?definitionId=14&branchName=master)
 
 Usage
 -----
 
 ```hcl
-
 #Set the terraform backend
 terraform {
   backend "azurerm" {
     storage_account_name = "infrsand1vpcjdld1"
     container_name       = "tfstate"
-    key                  = "Az-LoadBalancer.tfstate"
+    key                  = "Az-LoadBalancer.test.tfstate"
     resource_group_name  = "infr-jdld-noprd-rg1"
   }
 }
@@ -132,7 +131,7 @@ variable "additional_tags" {
 
 #Call module
 module "Az-VirtualNetwork-Demo" {
-  source                      = "git::https://github.com/JamesDLD/terraform-azurerm-Az-VirtualNetwork.git
+  source                      = "git::https://github.com/JamesDLD/terraform-azurerm-Az-VirtualNetwork.git"
   net_prefix                  = "myproductlb-perimeter"
   net_location                = var.location
   network_resource_group_name = "infr-jdld-noprd-rg2"

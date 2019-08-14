@@ -1,15 +1,9 @@
-/*
-terraform init -backend-config="/Users/jamesdumontledouarec/Documents/GitHub/terraform/Best-Practice/BestPractice-1/secret/main-jdld.json" -reconfigure
-terraform apply -var-file="/Users/jamesdumontledouarec/Documents/GitHub/terraform/Best-Practice/BestPractice-1/secret/main-jdld.json"
-terraform destroy -var-file="/Users/jamesdumontledouarec/Documents/GitHub/terraform/Best-Practice/BestPractice-1/secret/main-jdld.json"
-*/
-
 #Set the terraform backend
 terraform {
   backend "azurerm" {
     storage_account_name = "infrsand1vpcjdld1"
     container_name       = "tfstate"
-    key                  = "Az-LoadBalancer.tfstate"
+    key                  = "Az-LoadBalancer.test.tfstate"
     resource_group_name  = "infr-jdld-noprd-rg1"
   }
 }
@@ -129,7 +123,7 @@ variable "additional_tags" {
 
 #Call module
 module "Az-VirtualNetwork-Demo" {
-  source                      = "https://github.com/JamesDLD/terraform-azurerm-Az-VirtualNetwork.git"
+  source                      = "git::https://github.com/JamesDLD/terraform-azurerm-Az-VirtualNetwork.git"
   net_prefix                  = "myproductlb-perimeter"
   net_location                = var.location
   network_resource_group_name = "infr-jdld-noprd-rg2"
