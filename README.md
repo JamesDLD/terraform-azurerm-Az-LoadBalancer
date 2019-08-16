@@ -2,20 +2,14 @@ Test
 -----
 [![Build Status](https://dev.azure.com/jamesdld23/vpc_lab/_apis/build/status/JamesDLD.terraform-azurerm-Az-LoadBalancer?branchName=master)](https://dev.azure.com/jamesdld23/vpc_lab/_build/latest?definitionId=14&branchName=master)
 
+Requirement
+-----
+Terraform v0.12.6 and above. 
+
 Usage
 -----
 
 ```hcl
-#Set the terraform backend
-terraform {
-  backend "azurerm" {
-    storage_account_name = "infrsand1vpcjdld1"
-    container_name       = "tfstate"
-    key                  = "Az-LoadBalancer.test.tfstate"
-    resource_group_name  = "infr-jdld-noprd-rg1"
-  }
-}
-
 #Set the Provider
 provider "azurerm" {
   tenant_id       = var.tenant_id
@@ -131,7 +125,8 @@ variable "additional_tags" {
 
 #Call module
 module "Az-VirtualNetwork-Demo" {
-  source                      = "git::https://github.com/JamesDLD/terraform-azurerm-Az-VirtualNetwork.git?ref=0.1.0"
+  source                      = "JamesDLD/Az-VirtualNetwork/azurerm"
+  version                     = "0.1.1"
   net_prefix                  = "myproductlb-perimeter"
   net_location                = var.location
   network_resource_group_name = "infr-jdld-noprd-rg2"
@@ -143,7 +138,7 @@ module "Az-VirtualNetwork-Demo" {
 }
 
 module "Create-AzureRmLoadBalancer-Demo" {
-  source                 = "git::https://github.com/JamesDLD/terraform-azurerm-Az-LoadBalancer.git"
+  source                 = "JamesDLD/Az-LoadBalancer/azurerm"
   Lbs                    = var.Lbs
   lb_prefix              = "myproductlb-perimeter"
   lb_resource_group_name = "infr-jdld-noprd-rg2"
