@@ -34,25 +34,6 @@ variable "client_secret" {
 }
 
 #Set resource variables
-variable "virtual_networks" {
-  default = {
-    vnet1 = {
-      id            = "1"
-      prefix        = "npd"
-      address_space = ["10.0.1.0/24"]
-    }
-  }
-}
-
-variable "subnets" {
-  default = {
-    subnet1 = {
-      vnet_key       = "vnet1"       #(Mandatory) 
-      name           = "demolb1"     #(Mandatory) 
-      address_prefix = "10.0.1.0/28" #(Mandatory) 
-    }
-  }
-}
 
 variable "Lbs" {
   default = {
@@ -121,29 +102,35 @@ variable "additional_tags" {
   }
 }
 
-#Call module
-module "Az-VirtualNetwork-Demo" {
-  source                      = "JamesDLD/Az-VirtualNetwork/azurerm"
-  version                     = "0.1.1"
-  net_prefix                  = "myproductlb-perimeter"
-  net_location                = var.location
-  network_resource_group_name = "infr-jdld-noprd-rg2"
-  virtual_networks            = var.virtual_networks
-  subnets                     = var.subnets
-  route_tables                = []
-  network_security_groups     = []
-  net_additional_tags         = var.additional_tags
+#Call native Terraform resources
+
+data "azurerm_resource_group" "rg" {
+  name = var.rg_apps_name
 }
 
+resource "azurerm_virtual_network" "Demo" {
+  name                = "myproductlb-perimeter-npd-vnet1"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  address_space       = ["10.0.1.0/24"]
+  tags                = data.azurerm_resource_group.rg.tags
+  subnet {
+    name           = "demolb1"
+    address_prefix = "10.0.1.0/28"
+  }
+}
+
+#Call module
+
 module "Create-AzureRmLoadBalancer-Demo" {
+  #version = "0.1.1" <-- not specifying any version here because we always test the latest one
   source                 = "JamesDLD/Az-LoadBalancer/azurerm"
   Lbs                    = var.Lbs
   lb_prefix              = "myproductlb-perimeter"
-  lb_resource_group_name = "infr-jdld-noprd-rg2"
+  lb_resource_group_name = data.azurerm_resource_group.rg.name
   Lb_sku                 = var.Lb_sku
-  subnets_ids            = module.Az-VirtualNetwork-Demo.subnet_ids
+  subnets_ids            = [for x in azurerm_virtual_network.Demo.subnet : x.id if x.name == "demolb1"]
   lb_additional_tags     = var.additional_tags
   LbRules                = var.LbRules
   lb_location            = var.location #(Optional) Use the RG's location if not set
 }
-
