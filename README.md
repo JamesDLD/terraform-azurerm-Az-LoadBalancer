@@ -106,7 +106,7 @@ variable "LbRules" {
 
 
 variable "location" {
-  default = "francecentral"
+  default = "westus2"
 }
 
 variable "rg_apps_name" {
@@ -129,7 +129,7 @@ module "Az-VirtualNetwork-Demo" {
   version                     = "0.1.1"
   net_prefix                  = "myproductlb-perimeter"
   net_location                = var.location
-  network_resource_group_name = "infr-jdld-noprd-rg2"
+  network_resource_group_name = "infr-jdld-noprd-rg1"
   virtual_networks            = var.virtual_networks
   subnets                     = var.subnets
   route_tables                = []
@@ -141,7 +141,7 @@ module "Create-AzureRmLoadBalancer-Demo" {
   source                 = "JamesDLD/Az-LoadBalancer/azurerm"
   Lbs                    = var.Lbs
   lb_prefix              = "myproductlb-perimeter"
-  lb_resource_group_name = "infr-jdld-noprd-rg2"
+  lb_resource_group_name = "infr-jdld-noprd-rg1"
   Lb_sku                 = var.Lb_sku
   subnets_ids            = module.Az-VirtualNetwork-Demo.subnet_ids
   lb_additional_tags     = var.additional_tags

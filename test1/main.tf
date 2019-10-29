@@ -85,7 +85,7 @@ variable "LbRules" {
 
 
 variable "location" {
-  default = "francecentral"
+  default = "westus2"
 }
 
 variable "rg_apps_name" {
