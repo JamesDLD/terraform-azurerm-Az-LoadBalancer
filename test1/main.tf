@@ -1,7 +1,7 @@
 #Set the terraform backend
 terraform {
   backend "azurerm" {
-    storage_account_name = "infrsdbx1vpcjdld1"
+    storage_account_name = "infrasdbx1vpcjdld1"
     container_name       = "tfstate"
     key                  = "Az-LoadBalancer.test.tfstate"
     resource_group_name  = "infr-jdld-noprd-rg1"
