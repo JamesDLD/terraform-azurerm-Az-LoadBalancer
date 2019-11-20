@@ -98,7 +98,7 @@ variable "Lb_sku" {
 
 variable "additional_tags" {
   default = {
-    iac = "terraform"
+    iac = "terraform demo"
   }
 }
 
