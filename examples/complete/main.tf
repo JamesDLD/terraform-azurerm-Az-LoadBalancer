@@ -41,17 +41,17 @@ variable "Lbs" {
   default = {
 
     lb1 = {
-      id               = "1" #Id of the load balancer use as a suffix of the load balancer name
-      suffix_name      = "apa"
-      subnet_iteration = "0"        #Id of the Subnet
-      static_ip        = "10.0.1.4" #(Optional) Set null to get dynamic IP or delete this line
+      id          = "1" #Id of the load balancer use as a suffix of the load balancer name
+      suffix_name = "apa"
+      snet_key    = "demolb1"  #Key of the Subnet
+      static_ip   = "10.0.1.4" #(Optional) Set null to get dynamic IP or delete this line
     }
 
     lb2 = {
-      id               = "1" #Id of the load balancer use as a suffix of the load balancer name
-      suffix_name      = "iis"
-      subnet_iteration = "0"        #Id of the Subnet
-      static_ip        = "10.0.1.5" #(Optional) Set null to get dynamic IP or delete this line
+      id          = "1" #Id of the load balancer use as a suffix of the load balancer name
+      suffix_name = "iis"
+      snet_key    = "demolb1"  #Key of the Subnet
+      static_ip   = "10.0.1.5" #(Optional) Set null to get dynamic IP or delete this line
     }
 
   }
@@ -133,7 +133,7 @@ module "Create-AzureRmLoadBalancer-Demo" {
   lb_prefix              = "myproductlb-perimeter"
   lb_resource_group_name = data.azurerm_resource_group.rg.name
   Lb_sku                 = var.Lb_sku
-  subnets_ids            = [for x in azurerm_virtual_network.Demo.subnet : x.id if x.name == "demolb1"]
+  subnets                = { for x, y in azurerm_virtual_network.Demo.subnet : x.name => y }
   lb_additional_tags     = var.additional_tags
   LbRules                = var.LbRules
   lb_location            = var.location #(Optional) Use the RG's location if not set

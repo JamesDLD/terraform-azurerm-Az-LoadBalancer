@@ -24,9 +24,9 @@ variable "Lb_sku" {
   description = "SKU of the load balancer."
 }
 
-variable "subnets_ids" {
-  description = "A list of subnet ids."
-  type        = list(string)
+variable "subnets" {
+  description = "A map of subnet with keys containing the subnet 'id'."
+  type        = any
 }
 
 variable "lb_additional_tags" {

@@ -25,7 +25,7 @@ resource "azurerm_lb" "lb" {
 
   frontend_ip_configuration {
     name                          = "${var.lb_prefix}-${each.value["suffix_name"]}-nic1-LBCFG"
-    subnet_id                     = element(var.subnets_ids, each.value["subnet_iteration"])
+    subnet_id                     = lookup(var.subnets, each.value["snet_key"], null)["id"]
     private_ip_address_allocation = lookup(each.value, "static_ip", null) == null ? "dynamic" : "static"
     private_ip_address            = lookup(each.value, "static_ip", null)
   }
