@@ -14,6 +14,8 @@ provider "azurerm" {
   subscription_id = var.subscription_id
   client_id       = var.client_id
   client_secret   = var.client_secret
+  version         = "~> 2.0"
+  features {}
 }
 
 #Set authentication variables
@@ -123,8 +125,10 @@ resource "azurerm_virtual_network" "Demo" {
 #Call module
 
 module "Create-AzureRmLoadBalancer-Demo" {
-  #version = "0.1.1" <-- not specifying any version here because we always test the latest one
-  source                 = "JamesDLD/Az-LoadBalancer/azurerm"
+  source = "git::https://github.com/JamesDLD/terraform-azurerm-Az-LoadBalancer.git//?ref=master"
+  #source = "../../"
+  #source = "JamesDLD/Az-LoadBalancer/azurerm"
+  #version                     = "0.2.0"
   Lbs                    = var.Lbs
   lb_prefix              = "myproductlb-perimeter"
   lb_resource_group_name = data.azurerm_resource_group.rg.name
@@ -133,4 +137,8 @@ module "Create-AzureRmLoadBalancer-Demo" {
   lb_additional_tags     = var.additional_tags
   LbRules                = var.LbRules
   lb_location            = var.location #(Optional) Use the RG's location if not set
+}
+
+output "lbs" {
+  value = module.Create-AzureRmLoadBalancer-Demo.lbs
 }
