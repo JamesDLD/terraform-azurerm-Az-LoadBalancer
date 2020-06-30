@@ -118,7 +118,7 @@ resource "azurerm_virtual_network" "Demo" {
   tags                = data.azurerm_resource_group.rg.tags
   subnet {
     name           = "demolb1"
-    address_prefixes = ["10.0.1.0/28"]
+    address_prefix = "10.0.1.0/28"
   }
 }
 
