@@ -14,7 +14,6 @@ provider "azurerm" {
   subscription_id = var.subscription_id
   client_id       = var.client_id
   client_secret   = var.client_secret
-  version         = "~> 2.0"
   features {}
 }
 
@@ -60,7 +59,7 @@ variable "Lbs" {
 variable "LbRules" {
   default = {
     lbrules1 = {
-      Id                = "1"   #Id of a the rule within the Load Balancer 
+      Id                = "1"   #Id of a the rule within the Load Balancer
       lb_key            = "lb1" #Key of the Load Balancer
       suffix_name       = "apa" #It must equals the Lbs suffix_name
       lb_port           = "80"
@@ -72,7 +71,7 @@ variable "LbRules" {
     }
 
     lbrules2 = {
-      Id                = "2"   #Id of a the rule within the Load Balancer 
+      Id                = "2"   #Id of a the rule within the Load Balancer
       lb_key            = "lb2" #Key of the Load Balancer
       suffix_name       = "iis" #It must equals the Lbs suffix_name
       lb_port           = "80"
@@ -125,10 +124,10 @@ resource "azurerm_virtual_network" "Demo" {
 #Call module
 
 module "Create-AzureRmLoadBalancer-Demo" {
-  source = "git::https://github.com/JamesDLD/terraform-azurerm-Az-LoadBalancer.git//?ref=master"
   #source = "../../"
-  #source = "JamesDLD/Az-LoadBalancer/azurerm"
-  #version                     = "0.2.0"
+  #source = "git::https://github.com/JamesDLD/terraform-azurerm-Az-LoadBalancer.git//?ref=master"
+  source                 = "JamesDLD/Az-LoadBalancer/azurerm"
+  version                = "0.2.1"
   Lbs                    = var.Lbs
   lb_prefix              = "myproductlb-perimeter"
   lb_resource_group_name = data.azurerm_resource_group.rg.name

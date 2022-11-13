@@ -4,8 +4,9 @@ Test
 
 Requirement
 -----
-- Terraform v0.12.23 and above. 
-- AzureRm provider version 2.1 and above.
+
+- Terraform v1.3.4 and above.
+- AzureRm provider version 3.31.0 and above.
 
 Terraform resources used within the module
 -----

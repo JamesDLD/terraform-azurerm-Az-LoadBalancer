@@ -21,7 +21,7 @@ variables:
   - name: vmImageName
     value: "ubuntu-latest"
   - name: terraform_version
-    value: "0.12.26"
+    value: "1.3.4"
   - name: artifact_name
     value: Az-LoadBalancer
   - name: backend_and_main_secret_file_id
