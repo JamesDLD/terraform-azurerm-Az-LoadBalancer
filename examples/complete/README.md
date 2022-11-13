@@ -27,7 +27,6 @@ provider "azurerm" {
   subscription_id = var.subscription_id
   client_id       = var.client_id
   client_secret   = var.client_secret
-  version         = "~> 2.0"
   features {}
 }
 
@@ -139,7 +138,7 @@ resource "azurerm_virtual_network" "Demo" {
 
 module "Create-AzureRmLoadBalancer-Demo" {
   source                 = "JamesDLD/Az-LoadBalancer/azurerm"
-  version                = "0.2.0"
+  version                = "0.2.1"
   Lbs                    = var.Lbs
   lb_prefix              = "myproductlb-perimeter"
   lb_resource_group_name = data.azurerm_resource_group.rg.name

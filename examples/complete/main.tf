@@ -124,10 +124,10 @@ resource "azurerm_virtual_network" "Demo" {
 #Call module
 
 module "Create-AzureRmLoadBalancer-Demo" {
-  source = "../../"
+  #source = "../../"
   #source = "git::https://github.com/JamesDLD/terraform-azurerm-Az-LoadBalancer.git//?ref=master"
-  #source = "JamesDLD/Az-LoadBalancer/azurerm"
-  #version                     = "0.2.0"
+  source                 = "JamesDLD/Az-LoadBalancer/azurerm"
+  version                = "0.2.1"
   Lbs                    = var.Lbs
   lb_prefix              = "myproductlb-perimeter"
   lb_resource_group_name = data.azurerm_resource_group.rg.name
