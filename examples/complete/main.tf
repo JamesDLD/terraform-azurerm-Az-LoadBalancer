@@ -125,8 +125,8 @@ resource "azurerm_virtual_network" "Demo" {
 #Call module
 
 module "Create-AzureRmLoadBalancer-Demo" {
-  source = "git::https://github.com/JamesDLD/terraform-azurerm-Az-LoadBalancer.git//?ref=master"
-  #source = "../../"
+  source = "../../"
+  #source = "git::https://github.com/JamesDLD/terraform-azurerm-Az-LoadBalancer.git//?ref=master"
   #source = "JamesDLD/Az-LoadBalancer/azurerm"
   #version                     = "0.2.0"
   Lbs                    = var.Lbs
