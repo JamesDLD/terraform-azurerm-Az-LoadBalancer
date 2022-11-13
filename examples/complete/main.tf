@@ -60,7 +60,7 @@ variable "Lbs" {
 variable "LbRules" {
   default = {
     lbrules1 = {
-      Id                = "1"   #Id of a the rule within the Load Balancer 
+      Id                = "1"   #Id of a the rule within the Load Balancer
       lb_key            = "lb1" #Key of the Load Balancer
       suffix_name       = "apa" #It must equals the Lbs suffix_name
       lb_port           = "80"
@@ -72,7 +72,7 @@ variable "LbRules" {
     }
 
     lbrules2 = {
-      Id                = "2"   #Id of a the rule within the Load Balancer 
+      Id                = "2"   #Id of a the rule within the Load Balancer
       lb_key            = "lb2" #Key of the Load Balancer
       suffix_name       = "iis" #It must equals the Lbs suffix_name
       lb_port           = "80"

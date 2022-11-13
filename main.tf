@@ -67,7 +67,9 @@ resource "azurerm_lb_rule" "lb_rule" {
   backend_address_pool_id = lookup(
     azurerm_lb_backend_address_pool.lb_backend,
     each.value["lb_key"],
-  )["id"]
+    )[
+    "id"
+  ]
   probe_id                = lookup(azurerm_lb_probe.lb_probe, each.key)["id"]
   load_distribution       = each.value["load_distribution"]
   idle_timeout_in_minutes = 4
